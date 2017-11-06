@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spot Shuffle</title>
+    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
+</head>
+<body>
+
+    <section class="hero is-dark" id="headerHero">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="title">
+                Spot Shuffle
+            </h1>
+            <h2 class="subtitle">
+                <br>
+                <a href="/login" class="button is-white">Log in</a>
+            </h2>
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="view">
+        <div class="tabs" id="menuApp">
+            <ul>
+                <li class="is-active" onclick="appController.getUserTracks()"><a>Musics</a></li>
+                <li><a onclick="appController.getUserAlbums()">Albums</a></li>
+                <li><a>...</a></li>
+                <li><a>...</a></li>
+            </ul>
+        </div>        
+        <div id="viewContent"></div>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <script src="public/js/app/service/UserService.js"></script>
+    <script src="public/js/app/view/UserView.js"></script>
+    <script src="public/js/app/view/AlbumListView.js"></script>
+    <script src="public/js/app/view/TrackListView.js"></script>
+    <script src="public/js/app/model/AlbumModel.js"></script>
+    <script src="public/js/app/model/TrackModel.js"></script>
+    <script src="public/js/app/model/TrackListModel.js"></script>
+    <script src="public/js/app/model/AlbumListModel.js"></script>
+    <script src="public/js/app/model/UserModel.js"></script>
+    <script src="public/js/app/controller/AppController.js"></script>
+
+    <script src="public/js/app/app.js"></script>
+</body>
+</html>
