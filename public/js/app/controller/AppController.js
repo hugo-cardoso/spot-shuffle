@@ -126,7 +126,7 @@ class AppController {
                         track.album.name, 
                         track.duration_ms, 
                         track.album.images[0], 
-                        track.href 
+                        track.external_urls.spotify 
                     ) 
                 );
             })

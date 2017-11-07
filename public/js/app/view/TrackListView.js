@@ -55,7 +55,11 @@ class TrackListView {
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-5">${ track.getName() }</p>
+                                <a href="${ track.getLink() }" target="parent">
+                                    <p class="title is-5">
+                                        ${ track.getName() }
+                                    </p>
+                                    </a>
                                     <p class="subtitle is-6">${ track.getArtist() }</p>
                                 </div>
                             </div>

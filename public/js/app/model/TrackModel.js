@@ -35,7 +35,7 @@ class TrackModel {
         return this._cover_url.url;
     }
 
-    getLinkUrl() {
+    getLink() {
 
         return this._link_url;
     }
