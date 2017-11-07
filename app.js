@@ -7,8 +7,7 @@ var url = require('url');
 
 var client_id = '86be2ff261cc4528aaac9c3ddec07157'; // Your client id
 var client_secret = 'c5a76037d5da40b4a7a3fc258a6f5fc4'; // Your secret
-var redirect_uri = 'https://nameless-dusk-44319.herokuapp.com/callback';
-// var redirect_uri = 'http://localhost:8888/callback';
+var redirect_uri =  process.env.redirect_uri || "http://localhost:8888/callback";
 
   /**
  * Generates a random string containing numbers and letters
@@ -136,6 +135,6 @@ app.get('/refresh_token', function(req, res) {
 });
 
 app.listen(process.env.PORT || 8888, function(){
-  console.log("Oi")
+  console.log(redirect_uri)
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
