@@ -30,9 +30,9 @@ class TrackModel {
         return this._duration;
     }
 
-    getCoverUrl() {
+    getImage() {
 
-        return this._cover_url;
+        return this._cover_url.url;
     }
 
     getLinkUrl() {

@@ -1,21 +1,13 @@
-/**
- * This is an example of a basic node.js script that performs
- * the Authorization Code oAuth2 flow to authenticate against
- * the Spotify Accounts.
- *
- * For more information, read
- * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
- */
-
-var express = require('express'); // Express web server framework
-var request = require('request'); // "Request" library
+var express = require('express');
+var request = require('request');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var path =  require('path');
+var url = require('url');
 
 var client_id = '86be2ff261cc4528aaac9c3ddec07157'; // Your client id
 var client_secret = 'c5a76037d5da40b4a7a3fc258a6f5fc4'; // Your secret
-var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+var redirect_uri = 'https://nameless-dusk-44319.herokuapp.com/callback'; // Your redirect uri
 
   /**
  * Generates a random string containing numbers and letters
@@ -57,6 +49,7 @@ app.get('/login', function(req, res) {
       state: state
     }));
 });
+
 
 app.get('/callback', function(req, res) {
 
@@ -142,5 +135,6 @@ app.get('/refresh_token', function(req, res) {
 });
 
 app.listen(process.env.PORT || 8888, function(){
+  console.log("Oi")
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });

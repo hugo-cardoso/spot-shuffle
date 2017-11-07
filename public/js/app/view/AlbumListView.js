@@ -14,11 +14,12 @@ class AlbumListView {
     _template( albumList ) {
 
         return `
+        
         <div class="columns is-multiline">
 
             ${ albumList.map(album =>
             `
-                <div class="column is-12-mobile is-3-desktop">
+                <div class="column is-12-mobile is-4-tablet is-3-desktop">
                     <div class="card" style="height: 100%;">
                         <div class="card-image">
                             <figure class="image is-square">

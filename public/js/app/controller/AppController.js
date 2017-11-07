@@ -8,6 +8,8 @@ class AppController {
         this.trackListView = new TrackListView("#viewContent");
         this.albumListView = new AlbumListView("#viewContent");
 
+        this._randomImageTime = null;
+
         this.params = null;
         this.access_token = null;
         this.refresh_token = null;
@@ -46,7 +48,6 @@ class AppController {
         this.error = this.params.error;
 
         if( this.error || !this.access_token ) {
-            alert('There was an error during the authentication');
             return;
         }
 
@@ -65,6 +66,16 @@ class AppController {
     checkAuthenticate() {
         
         return this.access_token ? true : false;
+    }
+
+    organizeBig() {
+
+        this.trackListView.organizeBig( this.trackList.getTracks() );
+    }
+
+    organizeSmall() {
+        
+        this.trackListView.organizeSmall( this.trackList.getTracks() );
     }
 
     getUserAlbums() {
@@ -89,6 +100,7 @@ class AppController {
             });
 
             this.albumListView.update( this.albumList.getAlbums() );
+            this.randomImages( this.albumList.getAlbums() );
         })
         .catch(error => {
 
@@ -120,11 +132,29 @@ class AppController {
             })
 
             this.trackListView.update( this.trackList.getTracks() );
+            this.randomImages( this.trackList.getTracks() );
         })
         .catch(error => {
 
             console.log(error);
         });
+    }
+
+    randomImages( model ) {
+
+        this._randomImageTime ? clearInterval(this._randomImageTime) : '';
+
+        this._randomImageTime = setInterval(() => {
+
+            let randomNumber =  Math.floor(Math.random() * (model.length - 0) + 0);
+
+            let imageUrl = model[randomNumber].getImage();
+
+            $("#headerHero .blur-bg").css({
+                "background-image": "url('"+ imageUrl +"')"
+            });
+
+        }, 6000)
     }
 
     hashParams(){
