@@ -1,4 +1,4 @@
-class AlbumListModel {
+export default class AlbumListModel {
 
     constructor() {
         

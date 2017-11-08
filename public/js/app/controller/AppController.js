@@ -1,4 +1,19 @@
-class AppController {
+import $ from 'jquery';
+
+import  UserService  from '../service/UserService';
+
+import  TrackListView  from '../view/TrackListView';
+import  AlbumListView  from '../view/AlbumListView';
+import  PlaylistsListView  from '../view/PlaylistsListView';
+
+import  AlbumListModel  from '../model/AlbumListModel';
+import  TrackListModel  from '../model/TrackListModel';
+import  PlaylistsListModel from '../model/PlaylistsListModel';
+import  TrackModel  from '../model/TrackModel';
+import  AlbumModel  from '../model/AlbumModel';
+import  PlaylistModel  from '../model/PlaylistsModel';
+
+export class AppController {
 
     constructor(){
 
@@ -33,6 +48,22 @@ class AppController {
             $(".nav-left__menu .nav-left__menu__item").removeClass("nav-left__menu__item--active");
             $(this).addClass("nav-left__menu__item--active");
         });
+
+        $("#btnGetUserTracks").click(() => {
+
+            this.getUserTracks();
+        });
+
+        $("#btnGetUserAlbums").click(() => {
+
+            this.getUserAlbums();
+        });
+
+        $("#btnGetUserPlaylists").click(() => {
+
+            this.getUserPlaylists();
+        });
+
     }
 
     authenticate(){
@@ -51,7 +82,7 @@ class AppController {
 
     getUserAlbums() {
 
-        this.userService.getUserAlbums(this.access_token)
+        this.userService.getUserAlbums()
         .then(res => {
 
             let items = res.items;
@@ -113,7 +144,7 @@ class AppController {
 
     getUserPlaylists() {
 
-        this.userService.getUserPlaylist(this.access_token)
+        this.userService.getUserPlaylist()
         .then(res => {
 
             let items = res.items;

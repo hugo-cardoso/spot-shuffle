@@ -1,4 +1,6 @@
-class PlaylistsListView {
+import $ from 'jquery';
+
+export default class PlaylistsListView {
 
     constructor( elem ) {
 

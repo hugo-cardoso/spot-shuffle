@@ -1,4 +1,6 @@
-class AlbumListView {
+import $ from 'jquery';
+
+export default class AlbumListView {
 
     constructor( elem ) {
 

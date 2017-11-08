@@ -1,4 +1,4 @@
-class PlaylistModel {
+export default class PlaylistModel {
 
     constructor( name, images, link, owner, colaborative  ) {
 

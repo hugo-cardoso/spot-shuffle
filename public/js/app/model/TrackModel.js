@@ -1,4 +1,4 @@
-class TrackModel {
+export default class TrackModel {
 
     constructor(name, artist, album, duration, cover_url, link_url) {
 

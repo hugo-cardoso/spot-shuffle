@@ -1,4 +1,4 @@
-class PlaylistsListModel {
+export default class PlaylistsListModel {
 
     constructor() {
         

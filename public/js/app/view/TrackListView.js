@@ -1,4 +1,6 @@
-class TrackListView {
+import $ from 'jquery';
+ 
+ export default class TrackListView {
 
     constructor( elem ) {
 

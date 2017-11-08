@@ -1,4 +1,4 @@
-class TrackListModel {
+export default class TrackListModel {
 
     constructor() {
         

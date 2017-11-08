@@ -21,13 +21,13 @@
 
     <div class="nav-left">
         <ul class="nav-left__menu">
-            <li class="nav-left__menu__item nav-left__menu__item--active" onclick="appController.getUserTracks()">
+            <li class="nav-left__menu__item nav-left__menu__item--active" id="btnGetUserTracks">
                 <i class="fa fa-music" aria-hidden="true"></i>
             </li>
-            <li class="nav-left__menu__item" onclick="appController.getUserAlbums()">
+            <li class="nav-left__menu__item" id="btnGetUserAlbums">
                 <i class="fa fa-folder" aria-hidden="true"></i>
             </li>
-            <li class="nav-left__menu__item" onclick="appController.getUserPlaylists()">
+            <li class="nav-left__menu__item" id="btnGetUserPlaylists">
                 <i class="fa fa-list" aria-hidden="true"></i>
             </li>
             <li class="nav-left__menu__item">
@@ -47,21 +47,7 @@
         </header>
         <div class="container" id="appContainer"></div>
     </div>
-    
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
-    <script src="public/js/app/service/UserService.js"></script>
-    <script src="public/js/app/view/PlaylistsListView.js"></script>
-    <script src="public/js/app/view/AlbumListView.js"></script>
-    <script src="public/js/app/view/TrackListView.js"></script>
-    <script src="public/js/app/model/PlaylistsListModel.js"></script>
-    <script src="public/js/app/model/PlaylistsModel.js"></script>
-    <script src="public/js/app/model/AlbumModel.js"></script>
-    <script src="public/js/app/model/TrackModel.js"></script>
-    <script src="public/js/app/model/TrackListModel.js"></script>
-    <script src="public/js/app/model/AlbumListModel.js"></script>
-    <script src="public/js/app/controller/AppController.js"></script>
-
-    <script src="public/js/app/app.js"></script>
+    <script src="public/js/build.js"></script>
 </body>
 </html>

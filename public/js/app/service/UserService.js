@@ -1,4 +1,6 @@
-class UserService {
+import $ from 'jquery';
+
+export default class UserService {
 
     constructor( access_token ) {
 
@@ -28,14 +30,14 @@ class UserService {
         })
     }
 
-    getUserAlbums( access_token ) {
+    getUserAlbums() {
         
         return new Promise((resolve, reject) => {
 
             $.ajax({
                 url: 'https://api.spotify.com/v1/me/albums',
                 headers: {
-                  'Authorization': 'Bearer ' + access_token
+                  'Authorization': 'Bearer ' + this._access_token
                 }
             })
             .done(res => {
@@ -49,14 +51,14 @@ class UserService {
         })
     }
 
-    getUserInfo( access_token ) {
+    getUserInfo() {
         
         return new Promise((resolve, reject) => {
 
             $.ajax({
                 url: 'https://api.spotify.com/v1/me',
                 headers: {
-                  'Authorization': 'Bearer ' + access_token
+                  'Authorization': 'Bearer ' + this._access_token
                 }
             })
             .done(res => {
@@ -70,14 +72,14 @@ class UserService {
         })
     }
 
-    getUserPlaylist( access_token ) {
+    getUserPlaylist() {
         
         return new Promise((resolve, reject) => {
 
             $.ajax({
                 url: 'https://api.spotify.com/v1/me/playlists',
                 headers: {
-                  'Authorization': 'Bearer ' + access_token
+                  'Authorization': 'Bearer ' + this._access_token
                 }
             })
             .done(res => {
