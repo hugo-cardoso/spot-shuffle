@@ -2,7 +2,6 @@ class AppController {
 
     constructor(){
 
-        this.userService = new UserService();
         this.trackList = new TrackListModel();
         this.albumList = new AlbumListModel();
         this.playlistList = new PlaylistsListModel();
@@ -11,12 +10,6 @@ class AppController {
         this.playlistsListView = new PlaylistsListView("#appContainer");
 
         this._randomImageTime = null;
-
-        this.params = null;
-        this.access_token = null;
-        this.refresh_token = null;
-        this.error = null;
-        this.userInfo = null;
 
         this.init();
     }
@@ -45,16 +38,15 @@ class AppController {
     authenticate(){
 
         this.params = this.hashParams();
-        this.access_token = this.params.access_token;
-        this.refresh_token = this.params.refresh_token;
-        this.error = this.params.error;
 
-        if( this.error || !this.access_token ) return;
+        if( this.params.error || !this.params.access_token ) return;
+
+        this.userService = new UserService( this.params.access_token );
     }
 
     checkAuthenticate() {
         
-        return this.access_token ? true : false;
+        return this.userService ? true : false;
     }
 
     getUserAlbums() {
@@ -89,7 +81,7 @@ class AppController {
 
     getUserTracks() {
 
-        this.userService.getUserTracks(this.access_token)
+        this.userService.getUserTracks()
         .then(res => {
 
             let items = res.items;
@@ -180,7 +172,6 @@ class AppController {
         while ( e = r.exec(q)) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
         }
-        console.log(hashParams)
         return hashParams;
     }
 }
