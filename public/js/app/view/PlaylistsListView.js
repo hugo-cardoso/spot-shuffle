@@ -23,11 +23,11 @@ export default class PlaylistsListView {
 
                 <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
-                        <img src="${ playlist.getImage() }" alt="${ playlist.getName() }">
+                        <img src="${ playlist.Image }" alt="${ playlist.Name }">
                         <div class="track__info">
                             <div class="track__info__wrap text-center">
-                                <p class="track__info__title">${ playlist.getName() }</p>
-                                <p class="track__info__sub-title">${ playlist.getOwner() }</p>
+                                <p class="track__info__title">${ playlist.Name }</p>
+                                <p class="track__info__sub-title">${ playlist.Owner }</p>
                             </div>
                         </div>
                     </div>

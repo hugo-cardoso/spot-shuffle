@@ -9,22 +9,27 @@ export default class PlaylistModel {
         this._colaborative = colaborative;
     }
 
-    getName() {
+    get Name() {
 
         return this._name;
     }
 
-    getImage() {
+    get Image() {
 
         return this._images[0].url;
     }
 
-    getLink() {
+    get Link() {
 
         return this._link;
     }
 
-    getOwner() {
+    get Owner() {
+
+        return this._owner.id;
+    }
+
+    get Colaborative() {
 
         return this._colaborative;
     }

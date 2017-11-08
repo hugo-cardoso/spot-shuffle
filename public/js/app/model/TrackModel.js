@@ -10,32 +10,32 @@ export default class TrackModel {
         this._link_url = link_url;
     }
 
-    getName() {
+    get Name() {
         
         return this._name;
     }
 
-    getArtist() {
+    get Artist() {
 
         return this._artist;
     }
 
-    getAlbum() {
+    get Album() {
 
         return this._album;
     }
 
-    getDuration() {
+    get Duration() {
 
         return this._duration;
     }
 
-    getImage() {
+    get Image() {
 
         return this._cover_url.url;
     }
 
-    getLink() {
+    get Link() {
 
         return this._link_url;
     }

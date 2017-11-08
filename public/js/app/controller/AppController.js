@@ -178,20 +178,20 @@ export class AppController {
         let randomFirstNumber =  Math.floor(Math.random() * (model.length - 0) + 0);
 
         $(".bg-home__blur-image").css({
-            "background-image": "url('"+ model[randomFirstNumber].getImage() +"')"
+            "background-image": "url('"+ model[randomFirstNumber].Image +"')"
         });
 
-        $(".bg-home__image").attr("src", model[randomFirstNumber].getImage());
+        $(".bg-home__image").attr("src", model[randomFirstNumber].Image);
 
         this._randomImageTime = setInterval(() => {
 
             let randomNumber =  Math.floor(Math.random() * (model.length - 0) + 0);
 
             $(".bg-home__blur-image").css({
-                "background-image": "url('"+ model[randomNumber].getImage() +"')"
+                "background-image": "url('"+ model[randomNumber].Image +"')"
             });
 
-            $(".bg-home__image").attr("src", model[randomNumber].getImage());
+            $(".bg-home__image").attr("src", model[randomNumber].Image);
 
         }, 10000)
     }

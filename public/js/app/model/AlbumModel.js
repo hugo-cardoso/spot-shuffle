@@ -8,22 +8,22 @@
         this._link = link;
     }
 
-    getName() {
+    get Name() {
 
         return this._name;
     }
 
-    getArtists() {
+    get Artists() {
 
         return this._artists[0].name;
     }
 
-    getImage() {
+    get Image() {
 
         return this._images[0].url;
     }
 
-    getLink() {
+    get Link() {
         
         return this._link;
     }
