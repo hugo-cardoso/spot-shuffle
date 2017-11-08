@@ -1,34 +1,212 @@
-.truncate {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+$accentColor: #606382;
+$primaryColor: #272748;
+$middleColor: #2b2c49;
+$darkColor: #23233a;
+$pinkColor: #ff4193;
+$purpleColor: #ba00dc;
+
+body {
+    background-color: $darkColor;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    padding: 50px 0px;
 }
 
-#headerHero {
-    position: relative;
-    overflow-y: hidden;
+/**************
+**** HELPERS
+***************/ 
 
-    .blur-bg {
+.container {
+    width: calc(100% - 30px);
+    padding: 0px 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/**************
+**** MENU
+***************/ 
+
+.nav-top {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: $middleColor;
+    z-index: 100;
+
+    &__title {
+        font-size: 15px;
+        color: #ffffff;
+        display: inline-block;
+        margin: 0px;
+        padding-left: 15px;
+
+        &--light {
+            font-weight: 300;
+        }
+    }
+
+    &__btn-content {
+        float: right;
+    }
+
+    &__btn {
+        height: 30px;
+        line-height: 30px;
+        text-decoration: none;
+        font-size: .8rem;
+        display: inline-block;
+        padding: 0px 20px;
+        border: 0px;
+        border-radius: 3px;
+        color: #ffffff;
+        background-color: $purpleColor;
+        margin-right: 15px;
+    }
+}
+
+.nav-left {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    width: 50px;
+    height: calc(100vh - 50px);
+    background-color: darken($middleColor, 2%);
+    border-right: 1px solid darken($middleColor, 5%);
+    z-index: 99;
+
+    &__wrap {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__menu {
+        width: 50px;
+        height: 100%;
+        background: darken($middleColor, 2%);;
+        padding: 0px;
+        margin: 0px;
+
+        &__item {
+            display: block;
+            width: 50px;
+            height: 50px;
+            color: $accentColor;
+            display: flex;
+            transition: all .2s linear;
+            cursor: pointer;
+
+            &--active,
+            &:hover {
+                color: #ffffff;
+            }
+
+            i {
+                margin: auto;
+            }
+        }
+    }
+
+    &__menu-view {
+        position: absolute;
+        left: -200px;
+        top: 0px;
+        width: 200px;
+        height: calc(100vh - 50px);
+        background-color: lighten($middleColor, 5%);
+        
+        &--active {
+            left: 50px;
+        }
+    }
+}
+
+/**************
+**** COMPONENTS
+***************/
+
+.bg-home {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 250px;
+    background-color: darken($darkColor, 5%);
+}
+
+.content-app {
+    padding-left: 50px;
+    width: 100%;
+}
+
+.track {
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+
+    &:hover {
+
+        &:after {
+            content: '';
+            opacity: 1;
+        }
+
+        .track__info {
+            display: block;
+            display: flex;
+        }
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background-color: rgba(0,0,0,0.80);
+        z-index: 1;
+        transition: all .2s linear;
+    }
+
+    &__info {
         position: absolute;
         width: 100%;
         height: 100%;
         left: 0px;
         top: 0px;
-        background-color: black;
-        background-image: url('https://i.scdn.co/image/544f7ecd3b7a84013d999e230b3920133033fd2e');
-        background-size: 120%;
-        background-position-y: -400px;
-        filter: blur(11px);
-        transition: all .5s linear;
-        animation-name: bg-animation;
-        animation-duration: 120s;
-        animation-iteration-count: infinite;
-        
+        display: none;
+        z-index: 2;
+        color: #ffffff;
+
+        &__wrap {
+            margin: auto;
+            padding: 0px 5px;
+        }
+
+        &__title {
+            color: #ffffff;
+            font-weight: 500;
+            margin: 0px 0px 5px;
+        }
+
+        &__sub-title {
+            color: #ffffff;
+            font-weight: 300;
+            margin: 0px;
+        }
     }
 
-    @keyframes bg-animation {
-        0% { background-size: 120%;}
-        100% { background-size: 150%;}
+    img {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
     }
 }

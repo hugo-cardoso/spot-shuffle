@@ -5,8 +5,10 @@ class AppController {
         this.userService = new UserService();
         this.trackList = new TrackListModel();
         this.albumList = new AlbumListModel();
-        this.trackListView = new TrackListView("#viewContent");
-        this.albumListView = new AlbumListView("#viewContent");
+        this.playlistList = new PlaylistsListModel();
+        this.trackListView = new TrackListView("#appContainer");
+        this.albumListView = new AlbumListView("#appContainer");
+        this.playlistsListView = new PlaylistsListView("#appContainer");
 
         this._randomImageTime = null;
 
@@ -25,7 +27,7 @@ class AppController {
 
         if( this.checkAuthenticate() ) {
 
-            $("view").show();
+            $("#loginButton").hide();
             this.getUserTracks();
         }
         else {
@@ -33,10 +35,10 @@ class AppController {
             $("#view").hide();
         }
 
-        $("#menuApp li a").click(function(){
+        $(".nav-left__menu .nav-left__menu__item").click(function(){
 
-            $("#menuApp li").removeClass("is-active");
-            $(this).parent("li").addClass("is-active");
+            $(".nav-left__menu .nav-left__menu__item").removeClass("nav-left__menu__item--active");
+            $(this).addClass("nav-left__menu__item--active");
         });
     }
 
@@ -47,35 +49,12 @@ class AppController {
         this.refresh_token = this.params.refresh_token;
         this.error = this.params.error;
 
-        if( this.error || !this.access_token ) {
-            return;
-        }
-
-        $.ajax({
-            url: 'https://api.spotify.com/v1/me',
-            headers: {
-              'Authorization': 'Bearer ' + this.access_token
-            },
-            success: response => {
-              
-              $("#headerHero .subtitle").html("Olá, " + response.id);
-            }
-        });
+        if( this.error || !this.access_token ) return;
     }
 
     checkAuthenticate() {
         
         return this.access_token ? true : false;
-    }
-
-    organizeBig() {
-
-        this.trackListView.organizeBig( this.trackList.getTracks() );
-    }
-
-    organizeSmall() {
-        
-        this.trackListView.organizeSmall( this.trackList.getTracks() );
     }
 
     getUserAlbums() {
@@ -99,8 +78,8 @@ class AppController {
                 );
             });
 
+            console.log(this.albumList.getAlbums())
             this.albumListView.update( this.albumList.getAlbums() );
-            this.randomImages( this.albumList.getAlbums() );
         })
         .catch(error => {
 
@@ -133,6 +112,35 @@ class AppController {
 
             this.trackListView.update( this.trackList.getTracks() );
             this.randomImages( this.trackList.getTracks() );
+        })
+        .catch(error => {
+
+            console.log(error);
+        });
+    }
+
+    getUserPlaylists() {
+
+        this.userService.getUserPlaylist(this.access_token)
+        .then(res => {
+
+            let items = res.items;
+
+            items.map(item => {
+
+                this.playlistList.addPlaylist( 
+                    new PlaylistModel( 
+                        item.name,
+                        item.images, 
+                        item.external_urls.spotify, 
+                        item.owner, 
+                        item.collaborative
+                    ) 
+                );                
+            })
+
+            this.playlistsListView.update( this.playlistList.getPlaylists() );
+            console.log(this.playlistList.getPlaylists())
         })
         .catch(error => {
 

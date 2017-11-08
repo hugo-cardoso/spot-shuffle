@@ -5,48 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Spot Shuffle</title>
-    <link rel="stylesheet" href="node_modules/bulma/css/bulma.css">
+    <link rel="stylesheet" href="public/css/grid12.css">
     <link rel="stylesheet" href="public/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-    <section class="hero is-dark" id="headerHero">
-        <div class="blur-bg"></div>
-        <div class="hero-body">
-            <div class="container">
-            <h1 class="title">
-                Spot Shuffle
-            </h1>
-            <h2 class="subtitle">
-                <br>
-                <a href="/login" class="button is-white">Log in</a>
-            </h2>
-            </div>
+    <div class="nav-top">
+        <h1 class="nav-top__title">Spot<span class="nav-top__title--light">Shuffle</span></h1>
+        <div class="nav-top__btn-content">
+            <a id="loginButton" href="/login" class="nav-top__btn">Log in</a>
         </div>
-    </section>
-
-    <div class="container" id="view">
-        <div class="tabs" id="menuApp">
-            <ul>
-                <li class="is-active" onclick="appController.getUserTracks()"><a>Musics</a></li>
-                <li><a onclick="appController.getUserAlbums()">Albums</a></li>
-            </ul>
-        </div>        
-        <div id="viewContent"></div>
     </div>
 
+    <div class="nav-left">
+        <ul class="nav-left__menu">
+            <li class="nav-left__menu__item nav-left__menu__item--active" onclick="appController.getUserTracks()">
+                <i class="fa fa-music" aria-hidden="true"></i>
+            </li>
+            <li class="nav-left__menu__item" onclick="appController.getUserAlbums()">
+                <i class="fa fa-folder" aria-hidden="true"></i>
+            </li>
+            <li class="nav-left__menu__item" onclick="appController.getUserPlaylists()">
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </li>
+            <li class="nav-left__menu__item">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </li>
+        </ul>
+        <div class="nav-left__menu-view"></div>
+    </div>
+
+    <div class="content-app">
+        <header class="bg-home"></header>
+        <div class="container" id="appContainer"></div>
+    </div>
+    
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
     <script src="public/js/app/service/UserService.js"></script>
-    <script src="public/js/app/view/UserView.js"></script>
+    <!-- <script src="public/js/app/view/PlaylistsListView.js"></script> -->
+    <script src="public/js/app/view/PlaylistsListView.js"></script>
     <script src="public/js/app/view/AlbumListView.js"></script>
     <script src="public/js/app/view/TrackListView.js"></script>
+    <script src="public/js/app/model/PlaylistsListModel.js"></script>
+    <script src="public/js/app/model/PlaylistsModel.js"></script>
     <script src="public/js/app/model/AlbumModel.js"></script>
     <script src="public/js/app/model/TrackModel.js"></script>
     <script src="public/js/app/model/TrackListModel.js"></script>
     <script src="public/js/app/model/AlbumListModel.js"></script>
-    <script src="public/js/app/model/UserModel.js"></script>
     <script src="public/js/app/controller/AppController.js"></script>
 
     <script src="public/js/app/app.js"></script>

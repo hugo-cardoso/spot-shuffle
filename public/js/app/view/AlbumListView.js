@@ -7,7 +7,6 @@ class AlbumListView {
 
     update( albumList ) {
 
-        console.log( albumList );
         this._elem.html( this._template( albumList ) );
     }
 
@@ -15,23 +14,18 @@ class AlbumListView {
 
         return `
         
-        <div class="columns is-multiline">
+        <div class="row">
 
             ${ albumList.map(album =>
             `
-                <div class="column is-12-mobile is-4-tablet is-3-desktop">
-                    <div class="card" style="height: 100%;">
-                        <div class="card-image">
-                            <figure class="image is-square">
-                                <img src="${ album.getImage() }" alt="${ album.getName() }">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">${ album.getName() }</p>
-                                    <p class="subtitle is-6">${ album.getArtists() }</p>
-                                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-2">
+                    <div class="track">
+                        <img src="${ album.getImage() }" alt="${ album.getName() }">
+                        <div class="track__info">
+                            <div class="track__info__wrap text-center">
+                                <p class="track__info__title">${ album.getName() }</p>
+                                <p class="track__info__sub-title">${ album.getArtists() }</p>
                             </div>
                         </div>
                     </div>
