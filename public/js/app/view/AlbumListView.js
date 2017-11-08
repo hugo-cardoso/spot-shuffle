@@ -19,7 +19,7 @@ class AlbumListView {
             ${ albumList.map(album =>
             `
 
-                <div class="col-sm-12 col-md-4 col-lg-2">
+                <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
                         <img src="${ album.getImage() }" alt="${ album.getName() }">
                         <div class="track__info">

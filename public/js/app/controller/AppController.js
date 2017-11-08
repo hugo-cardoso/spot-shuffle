@@ -78,8 +78,8 @@ class AppController {
                 );
             });
 
-            console.log(this.albumList.getAlbums())
             this.albumListView.update( this.albumList.getAlbums() );
+            this.randomImages( this.albumList.getAlbums() );
         })
         .catch(error => {
 
@@ -140,7 +140,7 @@ class AppController {
             })
 
             this.playlistsListView.update( this.playlistList.getPlaylists() );
-            console.log(this.playlistList.getPlaylists())
+            this.randomImages( this.playlistList.getPlaylists() );
         })
         .catch(error => {
 
@@ -152,17 +152,25 @@ class AppController {
 
         this._randomImageTime ? clearInterval(this._randomImageTime) : '';
 
+        let randomFirstNumber =  Math.floor(Math.random() * (model.length - 0) + 0);
+
+        $(".bg-home__blur-image").css({
+            "background-image": "url('"+ model[randomFirstNumber].getImage() +"')"
+        });
+
+        $(".bg-home__image").attr("src", model[randomFirstNumber].getImage());
+
         this._randomImageTime = setInterval(() => {
 
             let randomNumber =  Math.floor(Math.random() * (model.length - 0) + 0);
 
-            let imageUrl = model[randomNumber].getImage();
-
-            $("#headerHero .blur-bg").css({
-                "background-image": "url('"+ imageUrl +"')"
+            $(".bg-home__blur-image").css({
+                "background-image": "url('"+ model[randomNumber].getImage() +"')"
             });
 
-        }, 6000)
+            $(".bg-home__image").attr("src", model[randomNumber].getImage());
+
+        }, 10000)
     }
 
     hashParams(){

@@ -18,7 +18,7 @@ class TrackListView {
 
             ${ trackList.map(track =>
             `
-                <div class="col-sm-12 col-md-4 col-lg-2">
+                <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
                         <img src="${ track.getImage() }" alt="${ track.getArtist() }">
                         <div class="track__info">

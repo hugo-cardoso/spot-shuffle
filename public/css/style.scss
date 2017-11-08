@@ -138,6 +138,26 @@ body {
     width: 100%;
     height: 250px;
     background-color: darken($darkColor, 5%);
+    display: flex;
+
+    &__image {
+        margin: auto;
+        width: 200px;
+        z-index: 1;
+    }
+
+    &__blur-image {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        filter: blur(10px);
+        background-size: cover;
+        background-position: center;
+        transition: all .5s linear;
+        transform: scale(1.5);
+    }
 }
 
 .content-app {
@@ -209,4 +229,57 @@ body {
         margin: 0px;
         padding: 0px;
     }
+}
+
+@media screen and (max-width: 768px) {
+
+    .nav-left {
+        top: initial;
+        bottom: 0px;
+        width: 100%;
+        height: 50px;
+
+        &__menu {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+
+            &__item {
+                display: inline-flex;
+                position: relative;
+
+                &--active {
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        width: 100%;
+                        height: 3px;
+                        background-color: #ffffff;
+                    }
+                }
+            }
+        }
+    }
+
+    .track {
+
+        &__info {
+
+            &__title {
+                font-size: 0.8rem;
+            }
+
+            &__sub-title {
+                font-size: 0.75rem;
+            }
+        }
+    }
+
+    .content-app {
+        padding-left: 0px;
+    }
+
 }

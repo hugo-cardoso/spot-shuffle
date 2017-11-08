@@ -19,7 +19,7 @@ class PlaylistsListView {
             ${ playlistsList.map(playlist =>
             `
 
-                <div class="col-sm-12 col-md-4 col-lg-2">
+                <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
                         <img src="${ playlist.getImage() }" alt="${ playlist.getName() }">
                         <div class="track__info">
