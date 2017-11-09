@@ -11,6 +11,17 @@ body {
     padding: 0px;
     font-family: 'Roboto', sans-serif;
     padding: 50px 0px;
+
+    &.offline {
+        
+        .nav-left {
+            left: -50px;
+        }
+
+        .content-app {
+            padding-left: 0px;
+        }
+    }
 }
 
 /**************
@@ -30,6 +41,20 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/**************
+**** TYPO
+***************/ 
+
+.title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    &--view {
+        margin-bottom: 0px;
+    }
 }
 
 /**************
@@ -85,7 +110,8 @@ body {
     height: calc(100vh - 50px);
     background-color: darken($middleColor, 2%);
     border-right: 1px solid darken($middleColor, 5%);
-    z-index: 99;
+    z-index: 99;    
+    transition: all .5s linear;
 
     &__wrap {
         position: relative;
@@ -199,7 +225,6 @@ body {
                 margin: auto;
             }
         }
-
     }
 
     &__title {
@@ -223,7 +248,39 @@ body {
     }
 }
 
+.search {
+    margin-top: 30px;
+
+    &__form {
+        display: inline-flex;
+    }
+
+    &__input {
+        width: 250px;
+        height: 50px;
+        background-color: $accentColor;
+        border: 0px;
+        padding: 0px 15px;
+        color: #ffffff;
+    }
+
+    &__btn {
+        width: 50px;
+        color: #ffffff;
+        border: 0px;
+        background-color: $pinkColor;
+    }
+}
+
 @media screen and (max-width: 768px) {
+
+    body.offline {
+
+        .nav-left {
+            left: 0px;
+            bottom: -50px;
+        }
+    }
 
     .nav-left {
         top: initial;
@@ -259,6 +316,14 @@ body {
         }
     }
 
+    .title {
+    
+        &--view {
+            text-align: center;
+        }
+
+    }
+
     .track {
 
         &__info {
@@ -279,6 +344,19 @@ body {
                 height: 30px;
             }
 
+        }
+    }
+
+    .search {
+        width: 100%;
+
+        &__form {
+            width: 100%;
+        }
+    
+        &__input {
+            width: auto;
+            flex: auto;
         }
     }
 

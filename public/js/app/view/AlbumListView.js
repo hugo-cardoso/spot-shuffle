@@ -18,6 +18,8 @@ export default class AlbumListView {
         
         <div class="row">
 
+            <h3 class=" title title--view">My Albums</h3>
+
             ${ albumList.map(album =>
             `
 

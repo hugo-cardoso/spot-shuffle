@@ -16,7 +16,9 @@ import $ from 'jquery';
 
         return `
 
-        <div class="row">
+        <div class="row tracks">
+
+            <h3 class=" title title--view">My Tracks</h3>
 
             ${ trackList.map(track =>
             `

@@ -1,0 +1,17 @@
+import HttpService from '../service/HttpService';
+import $ from 'jquery';
+
+export default class AppService {
+
+    constructor( access_token ) {
+
+        this.httpService = new HttpService( access_token );
+    }
+
+    getSearch( textSearch ) {
+
+        let text = encodeURIComponent( textSearch );
+
+        return this.httpService.getData('https://api.spotify.com/v1/search?q=' + text + '&type=track');
+    } 
+}

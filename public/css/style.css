@@ -6,6 +6,14 @@ body {
   padding: 50px 0px;
 }
 
+body.offline .nav-left {
+  left: -50px;
+}
+
+body.offline .content-app {
+  padding-left: 0px;
+}
+
 /**************
 **** HELPERS
 ***************/
@@ -22,6 +30,19 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/**************
+**** TYPO
+***************/
+.title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.title--view {
+  margin-bottom: 0px;
 }
 
 /**************
@@ -77,6 +98,7 @@ body {
   background-color: #272843;
   border-right: 1px solid #222239;
   z-index: 99;
+  transition: all .5s linear;
 }
 
 .nav-left__wrap {
@@ -211,7 +233,35 @@ body {
   display: none;
 }
 
+.search {
+  margin-top: 30px;
+}
+
+.search__form {
+  display: inline-flex;
+}
+
+.search__input {
+  width: 250px;
+  height: 50px;
+  background-color: #606382;
+  border: 0px;
+  padding: 0px 15px;
+  color: #ffffff;
+}
+
+.search__btn {
+  width: 50px;
+  color: #ffffff;
+  border: 0px;
+  background-color: #ff4193;
+}
+
 @media screen and (max-width: 768px) {
+  body.offline .nav-left {
+    left: 0px;
+    bottom: -50px;
+  }
   .nav-left {
     top: initial;
     bottom: 0px;
@@ -239,6 +289,9 @@ body {
     height: 3px;
     background-color: #ffffff;
   }
+  .title--view {
+    text-align: center;
+  }
   .track__info__title {
     font-size: 0.8rem;
   }
@@ -248,6 +301,16 @@ body {
   .track__cover-wrap .track__btn-play {
     width: 30px;
     height: 30px;
+  }
+  .search {
+    width: 100%;
+  }
+  .search__form {
+    width: 100%;
+  }
+  .search__input {
+    width: auto;
+    flex: auto;
   }
   .content-app {
     padding-left: 0px;

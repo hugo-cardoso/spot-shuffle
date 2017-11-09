@@ -18,6 +18,8 @@ export default class PlaylistsListView {
         
         <div class="row">
 
+        <h3 class=" title title--view">My Playlists</h3>
+
             ${ playlistsList.map(playlist =>
             `
 

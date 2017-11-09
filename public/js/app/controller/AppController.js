@@ -1,11 +1,15 @@
 import $ from 'jquery';
 
+import  AppService from '../service/AppService';
 import  UserService  from '../service/UserService';
 
 import  TrackListView  from '../view/TrackListView';
 import  AlbumListView  from '../view/AlbumListView';
 import  PlaylistsListView  from '../view/PlaylistsListView';
 import  RandomImageView from '../view/RandomImageView';
+import  SearchView from '../view/SearchView';
+import  SearchResultView from '../view/SearchResultView';
+
 
 import  AlbumListModel  from '../model/AlbumListModel';
 import  TrackListModel  from '../model/TrackListModel';
@@ -25,6 +29,7 @@ export class AppController {
         this.albumListView = new AlbumListView("#appContainer");
         this.playlistsListView = new PlaylistsListView("#appContainer");
         this.randomImagesView = new RandomImageView(".bg-home");
+        this.searchView = new SearchView("#appContainer");
 
         this.init();
     }
@@ -36,11 +41,8 @@ export class AppController {
         if( this.checkAuthenticate() ) {
 
             $("#loginButton").hide();
+            $("body").removeClass("offline");
             this.getUserTracks();
-        }
-        else {
-
-            $("#view").hide();
         }
 
         $(".nav-left__menu .nav-left__menu__item").click(function(){
@@ -65,6 +67,20 @@ export class AppController {
         $("#btnGetUserPlaylists").click(() => {
 
             this.getUserPlaylists();
+        });
+
+        $("#createSearchView").click(() => {
+
+            this.openSearchView();
+        });
+
+        $(document).on('submit', '#formSearch', (_elem) => {
+
+            let searchText = $(".search__input").val();
+
+            this.search( searchText );
+
+            _elem.preventDefault();
         });
 
         $(document).on('click', '.track__btn-play', (_elem) => {
@@ -111,9 +127,12 @@ export class AppController {
 
         this.params = this.hashParams();
 
+        console.log(this.params)
+
         if( this.params.error || !this.params.access_token ) return;
 
         this.userService = new UserService( this.params.access_token );
+        this.appService = new AppService( this.params.access_token );
     }
 
     checkAuthenticate() {
@@ -190,7 +209,7 @@ export class AppController {
 
     getUserPlaylists() {
 
-        this.playlistList.clearList();
+        this.playlistList.cleaformSearchrList();
 
         this.userService.getUserPlaylist()
         .then(res => {
@@ -217,6 +236,55 @@ export class AppController {
 
             console.log(error);
         });
+    }
+
+    search( _searchText ) {
+
+        let searchText = _searchText;
+
+        console.log(searchText)
+        
+        if( !searchText ) return;
+
+        this.trackList.clearList();
+
+        this.appService.getSearch( searchText )
+        .then(res => {
+
+            let items = res.tracks.items;
+
+            console.log(items)
+
+            items.map(track => {
+
+                this.trackList.addTrack( 
+                    new TrackModel( 
+                        track.name,
+                        track.artists[0].name, 
+                        track.album.name, 
+                        track.duration_ms, 
+                        track.album.images, 
+                        track.external_urls.spotify,
+                        track.preview_url
+                    ) 
+                );
+            })
+
+            console.log(this.trackList.Tracks);
+
+            let searchResultView = new SearchResultView("#searchContent");
+            searchResultView.update( this.trackList.Tracks )
+            this.randomImages( this.trackList.Tracks );
+        })
+        .catch(error => {
+
+            console.log(error);
+        });
+    }
+
+    openSearchView() {
+
+        this.searchView.create();
     }
 
     randomImages( model ) {
