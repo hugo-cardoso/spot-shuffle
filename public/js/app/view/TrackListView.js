@@ -22,13 +22,28 @@ import $ from 'jquery';
             `
                 <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
-                        <img src="${ track.Image }" alt="${ track.Artist }">
-                        <div class="track__info">
-                            <div class="track__info__wrap text-center">
-                                <p class="track__info__title">${ track.Name }</p>
-                                <p class="track__info__sub-title">${ track.Artist }</p>
-                            </div>
+                        <div class="track__cover-wrap">
+                            <img class="track__cover" src="${ track.Image }" alt="${ track.Artist }">
+
+                            ${ 
+                                track.Preview ? 
+                                ` 
+                                <a class="track__btn-play" data-status="paused">
+                                    <i class="fa fa-play" aria-hidden="true"></i>
+                                </a>                                
+
+                                ` : '' 
+                            }
+
                         </div>
+
+                        ${ 
+                            track.Preview ? ` <audio src="${ track.Preview }" controls></audio> ` : '' 
+                        }
+
+                        <p class="track__title truncate">${ track.Name }</p>
+                        <p class="track__sub-title truncate">${ track.Artist }</p>
+
                     </div>
                 </div>
 

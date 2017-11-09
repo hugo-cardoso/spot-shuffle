@@ -23,13 +23,11 @@ export default class PlaylistsListView {
 
                 <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
-                        <img src="${ playlist.Image }" alt="${ playlist.Name }">
-                        <div class="track__info">
-                            <div class="track__info__wrap text-center">
-                                <p class="track__info__title">${ playlist.Name }</p>
-                                <p class="track__info__sub-title">${ playlist.Owner }</p>
-                            </div>
+                        <div class="track__cover-wrap">
+                            <img class="track__cover" src="${ playlist.Image }" alt="${ playlist.Name }">
                         </div>
+                        <p class="track__title truncate">${ playlist.Name }</p>
+                        <p class="track__sub-title truncate">${ playlist.Owner }</p>
                     </div>
                 </div>
 

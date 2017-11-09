@@ -26,6 +26,12 @@ body {
     text-align: center;
 }
 
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /**************
 **** MENU
 ***************/ 
@@ -168,66 +174,52 @@ body {
 .track {
     width: 100%;
     position: relative;
-    margin-top: 30px;
+    margin-top: 30px;    
 
-    &:hover {
+    &__cover-wrap {
+        position: relative;
 
-        &:after {
-            content: '';
-            opacity: 1;
-        }
-
-        .track__info {
-            display: block;
-            display: flex;
-        }
-    }
-
-    &:after {
-        content: '';
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        background-color: rgba(0,0,0,0.80);
-        z-index: 1;
-        transition: all .2s linear;
-    }
-
-    &__info {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0px;
-        top: 0px;
-        display: none;
-        z-index: 2;
-        color: #ffffff;
-
-        &__wrap {
-            margin: auto;
-            padding: 0px 5px;
-        }
-
-        &__title {
-            color: #ffffff;
-            font-weight: 500;
-            margin: 0px 0px 5px;
-        }
-
-        &__sub-title {
-            color: #ffffff;
-            font-weight: 300;
+        .track__cover {
+            width: 100%;
             margin: 0px;
+            padding: 0px;
         }
+
+        .track__btn-play {
+            position: absolute;
+            left: 0px;
+            bottom: 4px;
+            width: 50px;
+            height: 50px;
+            background-color: $pinkColor;
+            display: flex;
+            color: #ffffff;
+
+            i {
+                margin: auto;
+            }
+        }
+
     }
 
-    img {
+    &__title {
+        width: 100%;
+        margin: 5px 0px 2px 0px;
+        font-size: .85rem;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+    &__sub-title {
         width: 100%;
         margin: 0px;
-        padding: 0px;
+        font-size: .75rem;
+        font-weight: 300;
+        color: $accentColor;
+    }
+
+    audio {
+        display: none;
     }
 }
 
@@ -275,6 +267,15 @@ body {
             &__sub-title {
                 font-size: 0.75rem;
             }
+        }
+
+        &__cover-wrap {
+    
+            .track__btn-play {
+                width: 30px;
+                height: 30px;
+            }
+
         }
     }
 

@@ -64,6 +64,36 @@ export class AppController {
             this.getUserPlaylists();
         });
 
+        $(document).on('click', '.track__btn-play', (_elem) => {
+
+            let elem = _elem.target.nodeName === "I" ? $(_elem.target).parent() : $(_elem.target);
+
+            let audio = $(elem).parent().next("audio").get(0);
+
+            if ( audio.paused ) {
+
+                let audios = document.querySelectorAll("audio");
+
+                audios.forEach(audio => {
+
+                    let button = $(audio).parents(".track").find(".track__btn-play");
+
+                    button.find("i").removeClass("fa-pause").addClass("fa-play");
+
+                    audio.pause();
+                });
+
+                $(elem).find("i").removeClass("fa-play").addClass("fa-pause");
+                audio.play();
+            }
+            else {
+
+                $(elem).find("i").removeClass("fa-pause").addClass("fa-play");
+                audio.pause(); 
+            }
+
+            
+        });
     }
 
     authenticate(){
@@ -128,7 +158,8 @@ export class AppController {
                         track.album.name, 
                         track.duration_ms, 
                         track.album.images[0], 
-                        track.external_urls.spotify 
+                        track.external_urls.spotify,
+                        track.preview_url
                     ) 
                 );
             })
