@@ -10,8 +10,13 @@ export default class AlbumListModel {
         this._albums.push( album );
     }
 
-    getAlbums() {
+    get Albums() {
 
         return this._albums;
+    }
+
+    clearList() {
+
+        this._albums = [];
     }
 }

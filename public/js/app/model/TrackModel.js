@@ -32,8 +32,8 @@ export default class TrackModel {
     }
 
     get Image() {
-
-        return this._cover_url.url;
+        
+        return this._cover_url[0].url;
     }
 
     get Link() {

@@ -10,8 +10,13 @@ export default class PlaylistsListModel {
         this._playlists.push( playlist );
     }
 
-    getPlaylists() {
+    get Playlists() {
 
         return this._playlists;
+    }
+
+    clearList() {
+
+        this._playlists = [];
     }
 }

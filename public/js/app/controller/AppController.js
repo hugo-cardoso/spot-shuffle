@@ -5,6 +5,7 @@ import  UserService  from '../service/UserService';
 import  TrackListView  from '../view/TrackListView';
 import  AlbumListView  from '../view/AlbumListView';
 import  PlaylistsListView  from '../view/PlaylistsListView';
+import  RandomImageView from '../view/RandomImageView';
 
 import  AlbumListModel  from '../model/AlbumListModel';
 import  TrackListModel  from '../model/TrackListModel';
@@ -23,8 +24,7 @@ export class AppController {
         this.trackListView = new TrackListView("#appContainer");
         this.albumListView = new AlbumListView("#appContainer");
         this.playlistsListView = new PlaylistsListView("#appContainer");
-
-        this._randomImageTime = null;
+        this.randomImagesView = new RandomImageView(".bg-home");
 
         this.init();
     }
@@ -45,8 +45,11 @@ export class AppController {
 
         $(".nav-left__menu .nav-left__menu__item").click(function(){
 
-            $(".nav-left__menu .nav-left__menu__item").removeClass("nav-left__menu__item--active");
-            $(this).addClass("nav-left__menu__item--active");
+            $(".nav-left__menu .nav-left__menu__item")
+                .removeClass("nav-left__menu__item--active");
+
+            $(this)
+                .addClass("nav-left__menu__item--active");
         });
 
         $("#btnGetUserTracks").click(() => {
@@ -66,9 +69,9 @@ export class AppController {
 
         $(document).on('click', '.track__btn-play', (_elem) => {
 
-            let elem = _elem.target.nodeName === "I" ? $(_elem.target).parent() : $(_elem.target);
-
-            let audio = $(elem).parent().next("audio").get(0);
+            let elem = $(_elem.target).parents(".track");
+            let audio = $(elem).find("audio").get(0);
+            let button = $(elem).find(".track__btn-play");
 
             if ( audio.paused ) {
 
@@ -78,17 +81,25 @@ export class AppController {
 
                     let button = $(audio).parents(".track").find(".track__btn-play");
 
-                    button.find("i").removeClass("fa-pause").addClass("fa-play");
+                    button.find("i")
+                        .removeClass("fa-pause")
+                        .addClass("fa-play");
 
                     audio.pause();
                 });
 
-                $(elem).find("i").removeClass("fa-play").addClass("fa-pause");
+                button.find("i")
+                    .removeClass("fa-play")
+                    .addClass("fa-pause");
+
                 audio.play();
             }
             else {
 
-                $(elem).find("i").removeClass("fa-pause").addClass("fa-play");
+                button.find("i")
+                    .removeClass("fa-pause")
+                    .addClass("fa-play");
+
                 audio.pause(); 
             }
 
@@ -112,6 +123,8 @@ export class AppController {
 
     getUserAlbums() {
 
+        this.albumList.clearList();
+
         this.userService.getUserAlbums()
         .then(res => {
 
@@ -131,8 +144,8 @@ export class AppController {
                 );
             });
 
-            this.albumListView.update( this.albumList.getAlbums() );
-            this.randomImages( this.albumList.getAlbums() );
+            this.albumListView.update( this.albumList.Albums );
+            this.randomImages( this.albumList.Albums );
         })
         .catch(error => {
 
@@ -141,6 +154,8 @@ export class AppController {
     }
 
     getUserTracks() {
+
+        this.trackList.clearList();
 
         this.userService.getUserTracks()
         .then(res => {
@@ -157,15 +172,15 @@ export class AppController {
                         track.artists[0].name, 
                         track.album.name, 
                         track.duration_ms, 
-                        track.album.images[0], 
+                        track.album.images, 
                         track.external_urls.spotify,
                         track.preview_url
                     ) 
                 );
             })
 
-            this.trackListView.update( this.trackList.getTracks() );
-            this.randomImages( this.trackList.getTracks() );
+            this.trackListView.update( this.trackList.Tracks );
+            this.randomImages( this.trackList.Tracks );
         })
         .catch(error => {
 
@@ -174,6 +189,8 @@ export class AppController {
     }
 
     getUserPlaylists() {
+
+        this.playlistList.clearList();
 
         this.userService.getUserPlaylist()
         .then(res => {
@@ -193,8 +210,8 @@ export class AppController {
                 );                
             })
 
-            this.playlistsListView.update( this.playlistList.getPlaylists() );
-            this.randomImages( this.playlistList.getPlaylists() );
+            this.playlistsListView.update( this.playlistList.Playlists );
+            this.randomImages( this.playlistList.Playlists );
         })
         .catch(error => {
 
@@ -204,27 +221,7 @@ export class AppController {
 
     randomImages( model ) {
 
-        this._randomImageTime ? clearInterval(this._randomImageTime) : '';
-
-        let randomFirstNumber =  Math.floor(Math.random() * (model.length - 0) + 0);
-
-        $(".bg-home__blur-image").css({
-            "background-image": "url('"+ model[randomFirstNumber].Image +"')"
-        });
-
-        $(".bg-home__image").attr("src", model[randomFirstNumber].Image);
-
-        this._randomImageTime = setInterval(() => {
-
-            let randomNumber =  Math.floor(Math.random() * (model.length - 0) + 0);
-
-            $(".bg-home__blur-image").css({
-                "background-image": "url('"+ model[randomNumber].Image +"')"
-            });
-
-            $(".bg-home__image").attr("src", model[randomNumber].Image);
-
-        }, 10000)
+        this.randomImagesView.update( model );
     }
 
     hashParams(){

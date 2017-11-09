@@ -10,8 +10,13 @@ export default class TrackListModel {
         this._tracks.push( track );
     }
 
-    getTracks() {
+    get Tracks() {
 
         return this._tracks;
+    }
+
+    clearList() {
+
+        this._tracks = [];
     }
 }
