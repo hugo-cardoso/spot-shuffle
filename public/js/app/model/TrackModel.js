@@ -1,6 +1,6 @@
 export default class TrackModel {
 
-    constructor(name, artist, album, duration, cover_url, link_url, preview_url) {
+    constructor(name, artist, album, duration, cover_url, link_url, preview_url, id) {
 
         this._name = name;
         this._artist = artist;
@@ -9,6 +9,7 @@ export default class TrackModel {
         this._cover_url = cover_url;
         this._link_url = link_url;
         this._preview_url = preview_url;
+        this._id = id;
     }
 
     get Name() {
@@ -44,5 +45,10 @@ export default class TrackModel {
     get Preview() {
 
         return this._preview_url;
+    }
+
+    get Id() {
+
+        return this._id;
     }
 }

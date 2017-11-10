@@ -13,5 +13,10 @@ export default class AppService {
         let text = encodeURIComponent( textSearch );
 
         return this.httpService.getData('https://api.spotify.com/v1/search?q=' + text + '&type=track');
-    } 
+    }
+
+    getTrack( id ) {
+
+        return this.httpService.getData('https://api.spotify.com/v1/tracks/' + id);
+    }
 }

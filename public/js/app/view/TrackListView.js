@@ -43,7 +43,7 @@ import $ from 'jquery';
                             track.Preview ? ` <audio src="${ track.Preview }" controls></audio> ` : '' 
                         }
 
-                        <p class="track__title truncate">${ track.Name }</p>
+                        <p class="track__title truncate openTrack" data-id="${ track.Id }">${ track.Name }</p>
                         <p class="track__sub-title truncate">${ track.Artist }</p>
 
                     </div>

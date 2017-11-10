@@ -9,6 +9,7 @@ import  PlaylistsListView  from '../view/PlaylistsListView';
 import  RandomImageView from '../view/RandomImageView';
 import  SearchView from '../view/SearchView';
 import  SearchResultView from '../view/SearchResultView';
+import  ModalTrackView from '../view/ModalTrackView';
 
 
 import  AlbumListModel  from '../model/AlbumListModel';
@@ -30,6 +31,7 @@ export class AppController {
         this.playlistsListView = new PlaylistsListView("#appContainer");
         this.randomImagesView = new RandomImageView(".bg-home");
         this.searchView = new SearchView("#appContainer");
+        this.modalTrackView = new ModalTrackView(".modal-wrap");
 
         this.init();
     }
@@ -80,7 +82,22 @@ export class AppController {
 
             this.search( searchText );
 
+            $(".search__input").blur();
+
             _elem.preventDefault();
+        });
+
+        $(document).on('click', '.openTrack', (_elem) => {
+
+            let trackId = $(_elem.target).data("id");
+
+            this.getTrack( trackId );
+
+        });
+
+        $(document).on('click', '.closeModal', (_elem) => {
+
+            this.modalTrackView.close();
         });
 
         $(document).on('click', '.track__btn-play', (_elem) => {
@@ -140,6 +157,31 @@ export class AppController {
         return this.userService ? true : false;
     }
 
+    getTrack( id ) {
+
+        this.appService.getTrack( id )
+        .then(res => {
+
+            console.log(res);
+
+            let track = new TrackModel( 
+                res.name,
+                res.artists[0].name, 
+                res.album.name, 
+                res.duration_ms, 
+                res.album.images, 
+                res.external_urls.spotify,
+                res.preview_url,
+                res.id
+            ) 
+
+            this.modalTrackView.update( track );
+        })
+        .catch(error => {
+
+        })
+    }
+
     getUserAlbums() {
 
         this.albumList.clearList();
@@ -181,6 +223,8 @@ export class AppController {
 
             let items = res.items;
 
+            console.log(items);
+
             items.map(item => {
 
                 let track = item.track;
@@ -193,7 +237,8 @@ export class AppController {
                         track.duration_ms, 
                         track.album.images, 
                         track.external_urls.spotify,
-                        track.preview_url
+                        track.preview_url,
+                        track.id
                     ) 
                 );
             })
@@ -209,7 +254,7 @@ export class AppController {
 
     getUserPlaylists() {
 
-        this.playlistList.cleaformSearchrList();
+        this.playlistList.clearList();
 
         this.userService.getUserPlaylist()
         .then(res => {
@@ -269,8 +314,6 @@ export class AppController {
                     ) 
                 );
             })
-
-            console.log(this.trackList.Tracks);
 
             let searchResultView = new SearchResultView("#searchContent");
             searchResultView.update( this.trackList.Tracks )
