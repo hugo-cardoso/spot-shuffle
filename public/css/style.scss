@@ -57,6 +57,14 @@ body {
     }
 }
 
+.sub-title {
+    width: 100%;
+    margin: 0px;
+    font-size: .75rem;
+    font-weight: 300;
+    color: $accentColor;
+}
+
 /**************
 **** MENU
 ***************/ 
@@ -294,9 +302,44 @@ body {
     .modal {
         width: 100%;
         max-width: 500px;
-        height: 500px;
+        height: auto;
         margin: 0 auto;
         background-color: $middleColor;
+
+        &__title {
+            @extend .title;
+            margin: 0px;
+        }
+
+        &__sub-title {
+            @extend .sub-title;
+            font-size: 1rem;
+            color: $pinkColor;
+        }
+
+        &__infos {
+            margin: 15px 0px 0px;
+            padding: 0px;
+            list-style: none;
+            color: #ffffff;
+        }
+
+        &__info {
+            display: flex;
+            margin-bottom: 5px;
+
+            .icon {
+                width: 25px;
+                text-align: left;
+                color: $accentColor;
+            }
+
+            .text {
+                width: auto;
+                flex: auto;
+            }
+
+        }
 
         &__cover-wrap {
             width: 100%;
@@ -304,6 +347,22 @@ body {
             position: relative;
             overflow: hidden;
             display: flex;
+
+            .closeModal {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                width: 50px;
+                height: 50px;
+                background-color: $pinkColor;
+                border: 0;
+                color: #ffffff;
+
+                i {
+                    line-height: 50px;
+                    text-align: center;
+                }
+            }
         }
 
         &__cover {

@@ -35,7 +35,7 @@ body.offline .content-app {
 /**************
 **** TYPO
 ***************/
-.title {
+.title, .modal-wrap .modal__title {
   color: #ffffff;
   font-size: 1.5rem;
   font-weight: 500;
@@ -43,6 +43,14 @@ body.offline .content-app {
 
 .title--view {
   margin-bottom: 0px;
+}
+
+.sub-title, .modal-wrap .modal__sub-title {
+  width: 100%;
+  margin: 0px;
+  font-size: .75rem;
+  font-weight: 300;
+  color: #606382;
 }
 
 /**************
@@ -280,9 +288,41 @@ body.offline .content-app {
 .modal-wrap .modal {
   width: 100%;
   max-width: 500px;
-  height: 500px;
+  height: auto;
   margin: 0 auto;
   background-color: #2b2c49;
+}
+
+.modal-wrap .modal__title {
+  margin: 0px;
+}
+
+.modal-wrap .modal__sub-title {
+  font-size: 1rem;
+  color: #ff4193;
+}
+
+.modal-wrap .modal__infos {
+  margin: 15px 0px 0px;
+  padding: 0px;
+  list-style: none;
+  color: #ffffff;
+}
+
+.modal-wrap .modal__info {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.modal-wrap .modal__info .icon {
+  width: 25px;
+  text-align: left;
+  color: #606382;
+}
+
+.modal-wrap .modal__info .text {
+  width: auto;
+  flex: auto;
 }
 
 .modal-wrap .modal__cover-wrap {
@@ -291,6 +331,22 @@ body.offline .content-app {
   position: relative;
   overflow: hidden;
   display: flex;
+}
+
+.modal-wrap .modal__cover-wrap .closeModal {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50px;
+  height: 50px;
+  background-color: #ff4193;
+  border: 0;
+  color: #ffffff;
+}
+
+.modal-wrap .modal__cover-wrap .closeModal i {
+  line-height: 50px;
+  text-align: center;
 }
 
 .modal-wrap .modal__cover {

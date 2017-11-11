@@ -22,16 +22,33 @@ export default class ModalTrackView {
             <div class="modal__cover-wrap">
                 <div class="modal__cover-blur" style="background-image: url('${ model.Image }')"></div>
                 <img class="modal__cover" src="${ model.Image }" />
+                <button class="closeModal">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                </button>
             </div>
             <div class="modal__content">
-                <h3 class="title">${ model.Name }</h3>
-                <ul>
-                    <li>Artist: ${ model.Artist }</li>
-                    <li>Album: ${ model.Album }</li>
-                    <li>Duration: ${ model.Duration }</li>
-                    <li>ID: ${ model.Id }</li>
+                <h3 class="modal__title">${ model.Name }</h3>
+                <h4 class="modal__sub-title">${ model.Artist }</h4>
+                <ul class="modal__infos">
+                    <li class="modal__info">
+                        <div class="icon">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                        <div class="info">${ model.Artist }</div>
+                    </li>
+                    <li class="modal__info">
+                        <div class="icon">
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                        </div>
+                        <div class="info">${ model.Album }</div>
+                    </li>
+                    <li class="modal__info">
+                        <div class="icon">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="info">${ model.Duration }</div>
+                    </li>
                 </ul>
-                <button class="closeModal">CLOSE</button>
             </div>
         
         `

@@ -310,7 +310,8 @@ export class AppController {
                         track.duration_ms, 
                         track.album.images, 
                         track.external_urls.spotify,
-                        track.preview_url
+                        track.preview_url,
+                        track.id
                     ) 
                 );
             })
