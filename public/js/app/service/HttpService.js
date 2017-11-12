@@ -21,9 +21,9 @@ export default class HttpService {
                 
                 resolve(res);
             })
-            .fail(() => {
+            .fail(error => {
 
-                reject("Error.")
+                reject(error.statusText)
             });
         })
     }

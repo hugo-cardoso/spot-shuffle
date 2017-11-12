@@ -1,16 +1,16 @@
 export default class TrackModel {
 
-    constructor(name, artist, album, duration, cover_url = null, link_url = null, preview_url = null, id, popularity = null) {
+    constructor( opt ) {
 
-        this._name = name;
-        this._artist = artist;
-        this._album = album;
-        this._duration = duration;
-        this._cover_url = cover_url;
-        this._link_url = link_url;
-        this._preview_url = preview_url;
-        this._id = id;
-        this._popularity = popularity;
+        this._name = opt.name || null;
+        this._artist = opt.artists || null;
+        this._album = opt.albumName || null;
+        this._duration = opt.duration || null;
+        this._cover_url = opt.images || null;
+        this._link_url = opt.url || null;
+        this._preview_url = opt.preview || null;
+        this._id = opt.id || null;
+        this._popularity = opt.popularity || null;
     }
 
     get Name() {

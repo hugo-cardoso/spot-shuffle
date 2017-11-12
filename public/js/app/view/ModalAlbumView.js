@@ -1,18 +1,12 @@
 import $ from 'jquery';
 
-export default class ModalAlbumView {
+import ModalView from '../view/ModalView';
+
+export default class ModalAlbumView extends ModalView {
 
     constructor( _elem ) {
 
-        this.elem = $(_elem);
-    }
-
-    update( model ) {
-
-        console.log(model)
-
-        this.elem.find(".modal").html( this._template( model ) );
-        this._open();
+        super( $(_elem) );
     }
 
     _template( model ) {
@@ -38,7 +32,7 @@ export default class ModalAlbumView {
                                 <div class="icon">
                                     <i class="fa fa-music" aria-hidden="true"></i>
                                 </div>
-                                <div class="info">${ track.Name }</div>
+                                <div class="info openTrack" data-id="${ track.Id }">${ track.Name }</div>
                             </li>
                             `
                         ).join('')
@@ -48,15 +42,5 @@ export default class ModalAlbumView {
             </div>
         
         `
-    }
-
-    _open() {
-
-        this.elem.addClass("modal-wrap--active");
-    }
-
-    close() {
-
-        this.elem.removeClass("modal-wrap--active");
     }
 }

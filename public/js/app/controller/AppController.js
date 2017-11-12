@@ -172,22 +172,24 @@ export class AppController {
 
             console.log(res);
 
-            let track = new TrackModel( 
-                res.name,
-                res.artists[0].name, 
-                res.album.name, 
-                res.duration_ms, 
-                res.album.images, 
-                res.external_urls.spotify,
-                res.preview_url,
-                res.id,
-                res.popularity
-            ) 
+            let track = new TrackModel({
+                "name": res.name,
+                "artists": res.artists[0].name, 
+                "albumName": res.album.name, 
+                "duration": res.duration_ms, 
+                "images": res.album.images, 
+                "url": res.external_urls.spotify,
+                "preview": res.preview_url,
+                "id": res.id,
+                "popularity": res.popularity
+            });
+            
 
             this.modalTrackView.update( track );
         })
         .catch(error => {
-
+            
+            this.throwError(error);
         })
     }
 
@@ -203,17 +205,19 @@ export class AppController {
                 album.external_urls.spotify,
                 album.id,
                 album.tracks.items.map(track => {
-                    return new TrackModel( 
-                            track.name,
-                            track.artists[0].name, 
-                            album.name, 
-                            track.duration_ms, 
-                            album.images, 
-                            track.external_urls.spotify,
-                            track.preview_url,
-                            track.id,
-                            track.popularity
-                        )
+                    return new TrackModel({
+                        "name": track.name,
+                        "artists": track.artists[0].name, 
+                        "albumName": album.name, 
+                        "duration": track.duration_ms, 
+                        "images": album.images, 
+                        "url": track.external_urls.spotify,
+                        "preview": track.preview_url,
+                        "id": track.id,
+                        "popularity": track.popularity
+                    });
+
+                        
                 })
             )
 
@@ -221,6 +225,7 @@ export class AppController {
         })
         .catch(error => {
 
+            this.throwError(error);
         })
     }
 
@@ -246,17 +251,17 @@ export class AppController {
                         album.link,
                         album.id,
                         tracks.map(track => {
-                            return new TrackModel( 
-                                    track.name,
-                                    track.artists[0].name, 
-                                    album.name, 
-                                    track.duration_ms, 
-                                    album.images, 
-                                    track.external_urls.spotify,
-                                    track.preview_url,
-                                    track.id,
-                                    track.popularity
-                                )
+                            return  new TrackModel({
+                                        "name": track.name,
+                                        "artists": track.artists[0].name, 
+                                        "albumName": album.name, 
+                                        "duration": track.duration_ms, 
+                                        "images": album.images, 
+                                        "url": track.external_urls.spotify,
+                                        "preview": track.preview_url,
+                                        "id": track.id,
+                                        "popularity": track.popularity
+                                    })
                         })
                     )
                 );
@@ -267,7 +272,7 @@ export class AppController {
         })
         .catch(error => {
 
-            console.log(error);
+            this.throwError(error);
         });
     }
 
@@ -287,17 +292,17 @@ export class AppController {
                 let track = item.track;
 
                 this.trackList.addTrack( 
-                    new TrackModel( 
-                        track.name,
-                        track.artists[0].name, 
-                        track.album.name, 
-                        track.duration_ms, 
-                        track.album.images, 
-                        track.external_urls.spotify,
-                        track.preview_url,
-                        track.id,
-                        track.popularity
-                    ) 
+                    new TrackModel({
+                        "name": track.name,
+                        "artists": track.artists[0].name, 
+                        "albumName": track.album.name, 
+                        "duration": track.duration_ms, 
+                        "images": track.album.images, 
+                        "url": track.external_urls.spotify,
+                        "preview": track.preview_url,
+                        "id": track.id,
+                        "popularity": track.popularity
+                    }) 
                 );
             })
 
@@ -306,7 +311,7 @@ export class AppController {
         })
         .catch(error => {
 
-            console.log(error);
+            this.throwError(error);
         });
     }
 
@@ -337,7 +342,7 @@ export class AppController {
         })
         .catch(error => {
 
-            console.log(error);
+            this.throwError(error);
         });
     }
 
@@ -382,7 +387,7 @@ export class AppController {
         })
         .catch(error => {
 
-            console.log(error);
+            this.throwError(error);
         });
     }
 
@@ -394,6 +399,19 @@ export class AppController {
     randomImages( model ) {
 
         this.randomImagesView.update( model );
+    }
+
+    deslog() {
+
+        let url = window.location.origin;
+        window.location.href = url;
+    }
+
+    throwError(error) {
+
+        if( error === "Unauthorized" ) this.deslog();
+
+        console.log(error);
     }
 
     hashParams(){
