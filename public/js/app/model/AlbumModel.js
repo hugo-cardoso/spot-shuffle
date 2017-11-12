@@ -1,13 +1,13 @@
  export default class AlbumModel {
 
-    constructor( name, artists, images, link, id, tracks ) {
+    constructor( opt ) {
 
-        this._name = name;
-        this._artists = artists;
-        this._images = images;
-        this._link = link;
-        this._id = id;
-        this._tracks = tracks;
+        this._name = opt.name;
+        this._artists = opt.artists;
+        this._images = opt.images;
+        this._link = opt.url;
+        this._id = opt.id;
+        this._tracks = opt.tracks || [];
     }
 
     get Name() {

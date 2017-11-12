@@ -12,7 +12,7 @@ import $ from 'jquery';
         this._elem.html( this._template(trackList) );
     }
 
-    _template( trackList ) {
+    _template( trackList ) {        
 
         return `
 
@@ -20,7 +20,7 @@ import $ from 'jquery';
 
             <h3 class=" title title--view">My Tracks</h3>
 
-            ${ trackList.map(track =>
+            ${ trackList.Tracks.map(track =>
             `
                 <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
@@ -51,6 +51,16 @@ import $ from 'jquery';
 
             `
             ).join('') }
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <div class="pagination">
+                    <button class="pagination__btn prevPage" data-section="trackList" data-offset="${ trackList.Offset }">
+                        <i class="fa fa-caret-left" aria-hidden="true"></i>
+                    </button>
+                    <button class="pagination__btn nextPage" data-section="trackList" data-offset="${ trackList.Offset }">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     `;
     }

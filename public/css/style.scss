@@ -217,6 +217,7 @@ body {
             width: 100%;
             margin: 0px;
             padding: 0px;
+            cursor: pointer;
         }
 
         .track__btn-play {
@@ -282,6 +283,22 @@ body {
         color: #ffffff;
         border: 0px;
         background-color: $pinkColor;
+    }
+}
+
+.pagination {
+    display: inline-flex;
+    padding-top: 30px;
+    width: 100%;
+
+    &__btn {
+        width: 50%;
+        height: 50px;
+        background-color: $pinkColor;
+        color: #ffffff;
+        border: 0;
+        text-align: center;
+        line-height: 50px;
     }
 }
 
@@ -395,11 +412,14 @@ body {
 
 @media screen and (max-width: 768px) {
 
-    body.offline {
+    body {
+        padding-bottom: 80px;
 
-        .nav-left {
-            left: 0px;
-            bottom: -50px;
+        &.offline {
+            .nav-left {
+                left: 0px;
+                bottom: -50px;
+            }
         }
     }
 

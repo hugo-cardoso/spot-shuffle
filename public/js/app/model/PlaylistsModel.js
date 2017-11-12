@@ -1,12 +1,12 @@
 export default class PlaylistModel {
 
-    constructor( name, images, link, owner, colaborative  ) {
+    constructor( opt ) {
 
-        this._name = name;
-        this._images = images;
-        this._link = link;
-        this._owner = owner;
-        this._colaborative = colaborative;
+        this._name = opt.name;
+        this._images = opt.images;
+        this._link = opt.url;
+        this._owner = opt.owner;
+        this._colaborative = opt.collaborative;
     }
 
     get Name() {

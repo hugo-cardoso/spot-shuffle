@@ -18,7 +18,8 @@ export default class HttpService {
                 }
             })
             .done(res => {
-                
+
+                console.log(res);
                 resolve(res);
             })
             .fail(error => {

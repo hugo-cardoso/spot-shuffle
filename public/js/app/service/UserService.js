@@ -7,9 +7,9 @@ export default class UserService {
         this.httpService = new HttpService( access_token );
     }
 
-    getUserTracks( limitValue ) {
+    getUserTracks( limit, offset ) {
 
-        return this.httpService.getData('https://api.spotify.com/v1/me/tracks');
+        return this.httpService.getData('https://api.spotify.com/v1/me/tracks?limit=' + limit + '&offset=' + offset);
     }
 
     getUserAlbums() {

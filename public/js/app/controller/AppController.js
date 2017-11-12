@@ -49,15 +49,15 @@ export class AppController {
             this.getUserTracks();
         }
 
-        $(".nav-left__menu .nav-left__menu__item").click(function(){
+        $(".nav-left__menu .nav-left__menu__item").click(_elem => {
 
-            $("html, body").animate({ scrollTop: 0 }, "slow");
+            let elem = $(_elem.target);
 
-            $(".nav-left__menu .nav-left__menu__item")
-                .removeClass("nav-left__menu__item--active");
+            $(".nav-left__menu__item--active").removeClass("nav-left__menu__item--active");
 
-            $(this)
-                .addClass("nav-left__menu__item--active");
+            elem.addClass("nav-left__menu__item--active");
+
+            this.scrollTop();
         });
 
         $("#btnGetUserTracks").click(() => {
@@ -110,6 +110,36 @@ export class AppController {
             this.modalTrackView.close();
         });
 
+        $(document).on('click', '.nextPage', (_elem) => {
+
+            const elem    = $(_elem.target),
+                  section = elem.data("section"),
+                  limit   = 12,
+                  offset  = elem.data("offset") + limit;
+
+
+            const sections = {
+                "trackList": () => this.getUserTracks( limit, offset )
+            }
+
+            sections[ section ]();
+        });
+
+        $(document).on('click', '.prevPage', (_elem) => {
+
+            const elem    = $(_elem.target),
+                  section = elem.data("section"),
+                  limit   = 12,
+                  offset  = elem.data("offset") === 0 ? 0 : elem.data("offset")  - limit;
+
+
+            const sections = {
+                "trackList": () => this.getUserTracks( limit, offset )
+            }
+
+            sections[ section ]();
+        });
+
         $(document).on('click', '.track__btn-play', (_elem) => {
 
             let elem = $(_elem.target).parents(".track");
@@ -152,8 +182,6 @@ export class AppController {
 
         this.params = this.hashParams();
 
-        console.log(this.params)
-
         if( this.params.error || !this.params.access_token ) return;
 
         this.userService = new UserService( this.params.access_token );
@@ -169,8 +197,6 @@ export class AppController {
 
         this.appService.getTrack( id )
         .then(res => {
-
-            console.log(res);
 
             let track = new TrackModel({
                 "name": res.name,
@@ -198,13 +224,13 @@ export class AppController {
         this.appService.getAlbum( id )
         .then(album => {
 
-            let model = new AlbumModel(
-                album.name,
-                album.artists,
-                album.images,
-                album.external_urls.spotify,
-                album.id,
-                album.tracks.items.map(track => {
+            let model = new AlbumModel({
+                "name": album.name,
+                "artists": album.artists,
+                "images": album.images,
+                "url": album.external_urls.spotify,
+                "id": album.id,
+                "tracks": album.tracks.items.map(track => {
                     return new TrackModel({
                         "name": track.name,
                         "artists": track.artists[0].name, 
@@ -219,7 +245,7 @@ export class AppController {
 
                         
                 })
-            )
+            })
 
             this.modalAlbumView.update( model );
         })
@@ -244,13 +270,13 @@ export class AppController {
                 let tracks = album.tracks.items;
 
                 this.albumList.addAlbum(
-                    new AlbumModel(
-                        album.name,
-                        album.artists,
-                        album.images,
-                        album.link,
-                        album.id,
-                        tracks.map(track => {
+                    new AlbumModel({
+                        "name": album.name,
+                        "artists": album.artists,
+                        "images": album.images,
+                        "url": album.link,
+                        "id": album.id,
+                        "tracks": tracks.map(track => {
                             return  new TrackModel({
                                         "name": track.name,
                                         "artists": track.artists[0].name, 
@@ -263,7 +289,7 @@ export class AppController {
                                         "popularity": track.popularity
                                     })
                         })
-                    )
+                    })
                 );
             });
 
@@ -276,16 +302,21 @@ export class AppController {
         });
     }
 
-    getUserTracks() {
+    getUserTracks( _limit, _offset ) {
+
+        let limit = _limit || 12;
+        let offset = _offset || 0;
 
         this.trackList.clearList();
 
-        this.userService.getUserTracks()
+        this.userService.getUserTracks( limit, offset )
         .then(res => {
 
             let items = res.items;
 
-            console.log(items);
+            this.trackList.Offset = res.offset;
+
+            console.log(this.trackList.Offset)
 
             items.map(item => {
 
@@ -306,8 +337,9 @@ export class AppController {
                 );
             })
 
-            this.trackListView.update( this.trackList.Tracks );
+            this.trackListView.update( this.trackList );
             this.randomImages( this.trackList.Tracks );
+            this.scrollTop();
         })
         .catch(error => {
 
@@ -327,13 +359,13 @@ export class AppController {
             items.map(item => {
 
                 this.playlistList.addPlaylist( 
-                    new PlaylistModel( 
-                        item.name,
-                        item.images, 
-                        item.external_urls.spotify, 
-                        item.owner, 
-                        item.collaborative
-                    ) 
+                    new PlaylistModel({
+                        "name": item.name,
+                        "images": item.images, 
+                        "url": item.external_urls.spotify, 
+                        "owner": item.owner, 
+                        "collaborative": item.collaborative
+                    }) 
                 );                
             })
 
@@ -349,8 +381,6 @@ export class AppController {
     search( _searchText ) {
 
         let searchText = _searchText;
-
-        console.log(searchText)
         
         if( !searchText ) return;
 
@@ -359,25 +389,22 @@ export class AppController {
         this.appService.getSearch( searchText )
         .then(res => {
 
-            console.log(res)
-
             let items = res.tracks.items;
-
-            console.log(items)
 
             items.map(track => {
 
                 this.trackList.addTrack( 
-                    new TrackModel( 
-                        track.name,
-                        track.artists[0].name, 
-                        track.album.name, 
-                        track.duration_ms, 
-                        track.album.images, 
-                        track.external_urls.spotify,
-                        track.preview_url,
-                        track.id
-                    ) 
+                    new TrackModel({
+                        "name": track.name,
+                        "artists": track.artists[0].name, 
+                        "albumName": album.name, 
+                        "duration": track.duration_ms, 
+                        "images": album.images, 
+                        "url": track.external_urls.spotify,
+                        "preview": track.preview_url,
+                        "id": track.id,
+                        "popularity": track.popularity
+                    })
                 );
             })
 
@@ -407,6 +434,11 @@ export class AppController {
         window.location.href = url;
     }
 
+    scrollTop() {
+
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+
     throwError(error) {
 
         if( error === "Unauthorized" ) this.deslog();
@@ -415,8 +447,8 @@ export class AppController {
     }
 
     hashParams(){
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
+        let hashParams = {};
+        let e, r = /([^&;=]+)=?([^&;]*)/g,
             q = window.location.hash.substring(1);
         while ( e = r.exec(q)) {
             hashParams[e[1]] = decodeURIComponent(e[2]);
