@@ -10,6 +10,7 @@ import  RandomImageView from '../view/RandomImageView';
 import  SearchView from '../view/SearchView';
 import  SearchResultView from '../view/SearchResultView';
 import  ModalTrackView from '../view/ModalTrackView';
+import  ModalAlbumView from '../view/ModalAlbumView';
 
 
 import  AlbumListModel  from '../model/AlbumListModel';
@@ -32,6 +33,7 @@ export class AppController {
         this.randomImagesView = new RandomImageView(".bg-home");
         this.searchView = new SearchView("#appContainer");
         this.modalTrackView = new ModalTrackView(".modal-wrap");
+        this.modalAlbumView = new ModalAlbumView(".modal-wrap");
 
         this.init();
     }
@@ -48,6 +50,8 @@ export class AppController {
         }
 
         $(".nav-left__menu .nav-left__menu__item").click(function(){
+
+            $("html, body").animate({ scrollTop: 0 }, "slow");
 
             $(".nav-left__menu .nav-left__menu__item")
                 .removeClass("nav-left__menu__item--active");
@@ -92,7 +96,13 @@ export class AppController {
             let trackId = $(_elem.target).data("id");
 
             this.getTrack( trackId );
+        });
 
+        $(document).on('click', '.openAlbum', (_elem) => {
+
+            let albumId = $(_elem.target).data("id");
+
+            this.getAlbum( albumId );
         });
 
         $(document).on('click', '.closeModal', (_elem) => {
@@ -134,9 +144,7 @@ export class AppController {
                     .addClass("fa-play");
 
                 audio.pause(); 
-            }
-
-            
+            }     
         });
     }
 
@@ -172,10 +180,44 @@ export class AppController {
                 res.album.images, 
                 res.external_urls.spotify,
                 res.preview_url,
-                res.id
+                res.id,
+                res.popularity
             ) 
 
             this.modalTrackView.update( track );
+        })
+        .catch(error => {
+
+        })
+    }
+
+    getAlbum( id ) {
+
+        this.appService.getAlbum( id )
+        .then(album => {
+
+            let model = new AlbumModel(
+                album.name,
+                album.artists,
+                album.images,
+                album.external_urls.spotify,
+                album.id,
+                album.tracks.items.map(track => {
+                    return new TrackModel( 
+                            track.name,
+                            track.artists[0].name, 
+                            album.name, 
+                            track.duration_ms, 
+                            album.images, 
+                            track.external_urls.spotify,
+                            track.preview_url,
+                            track.id,
+                            track.popularity
+                        )
+                })
+            )
+
+            this.modalAlbumView.update( model );
         })
         .catch(error => {
 
@@ -194,13 +236,28 @@ export class AppController {
             items.map(item => {
                 
                 let album = item.album;
+                let tracks = album.tracks.items;
 
                 this.albumList.addAlbum(
                     new AlbumModel(
                         album.name,
                         album.artists,
                         album.images,
-                        album.link
+                        album.link,
+                        album.id,
+                        tracks.map(track => {
+                            return new TrackModel( 
+                                    track.name,
+                                    track.artists[0].name, 
+                                    album.name, 
+                                    track.duration_ms, 
+                                    album.images, 
+                                    track.external_urls.spotify,
+                                    track.preview_url,
+                                    track.id,
+                                    track.popularity
+                                )
+                        })
                     )
                 );
             });
@@ -238,7 +295,8 @@ export class AppController {
                         track.album.images, 
                         track.external_urls.spotify,
                         track.preview_url,
-                        track.id
+                        track.id,
+                        track.popularity
                     ) 
                 );
             })
@@ -295,6 +353,8 @@ export class AppController {
 
         this.appService.getSearch( searchText )
         .then(res => {
+
+            console.log(res)
 
             let items = res.tracks.items;
 

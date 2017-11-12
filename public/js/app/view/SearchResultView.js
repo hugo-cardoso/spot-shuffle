@@ -25,7 +25,7 @@ export default class SearchResultView {
                     <div class="col-xs-6 col-md-4 col-lg-2">
                         <div class="track">
                             <div class="track__cover-wrap">
-                                <img class="track__cover" src="${ track.Image }" alt="${ track.Artist }">
+                                <img class="track__cover openTrack" data-id="${ track.Id }" src="${ track.Image }" alt="${ track.Artist }">
 
                                 ${ 
                                     track.Preview ? 

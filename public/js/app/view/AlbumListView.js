@@ -26,9 +26,9 @@ export default class AlbumListView {
                 <div class="col-xs-6 col-md-4 col-lg-2">
                     <div class="track">
                         <div class="track__cover-wrap">
-                            <img class="track__cover" src="${ album.Image }" alt="${ album.Name }">
+                            <img class="track__cover openAlbum" data-id="${ album.Id }" src="${ album.Image }" alt="${ album.Name }">
                         </div>
-                        <p class="track__title truncate">${ album.Name }</p>
+                        <p class="track__title truncate openAlbum" data-id="${ album.Id }">${ album.Name }</p>
                         <p class="track__sub-title truncate">${ album.Artists }</p>
                     </div>
                 </div>

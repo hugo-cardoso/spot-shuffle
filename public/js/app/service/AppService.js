@@ -19,4 +19,14 @@ export default class AppService {
 
         return this.httpService.getData('https://api.spotify.com/v1/tracks/' + id);
     }
+
+    getAlbum( id ) {
+
+        return this.httpService.getData('https://api.spotify.com/v1/albums/' + id);
+    }
+
+    getTrackAlbum( id ) {
+
+        return this.httpService.getData('https://api.spotify.com/v1/albums/' + id + '/tracks');
+    }
 }

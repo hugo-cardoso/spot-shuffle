@@ -289,8 +289,10 @@ body.offline .content-app {
   width: 100%;
   max-width: 500px;
   height: auto;
+  max-height: 500px;
   margin: 0 auto;
   background-color: #2b2c49;
+  overflow-y: auto;
 }
 
 .modal-wrap .modal__title {
@@ -300,6 +302,7 @@ body.offline .content-app {
 .modal-wrap .modal__sub-title {
   font-size: 1rem;
   color: #ff4193;
+  font-weight: 400;
 }
 
 .modal-wrap .modal__infos {
@@ -429,7 +432,8 @@ body.offline .content-app {
   }
   .modal-wrap .modal {
     width: 90%;
-    height: 90vh;
+    height: auto;
+    max-height: 90vh;
     margin-top: 5vh;
   }
   .content-app {

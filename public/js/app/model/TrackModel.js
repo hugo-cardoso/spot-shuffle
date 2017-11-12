@@ -1,6 +1,6 @@
 export default class TrackModel {
 
-    constructor(name, artist, album, duration, cover_url, link_url, preview_url, id) {
+    constructor(name, artist, album, duration, cover_url = null, link_url = null, preview_url = null, id, popularity = null) {
 
         this._name = name;
         this._artist = artist;
@@ -10,6 +10,7 @@ export default class TrackModel {
         this._link_url = link_url;
         this._preview_url = preview_url;
         this._id = id;
+        this._popularity = popularity;
     }
 
     get Name() {
@@ -29,7 +30,7 @@ export default class TrackModel {
 
     get Duration() {
 
-        return this._duration;
+        return this._msToMin( this._duration );
     }
 
     get Image() {
@@ -50,5 +51,16 @@ export default class TrackModel {
     get Id() {
 
         return this._id;
+    }
+
+    get Popularity() {
+
+        return this._popularity;
+    }
+
+    _msToMin( ms ) {
+        let min = Math.floor(ms / 60000);
+        let sec = ((ms % 60000) / 1000).toFixed(0);
+        return min + ":" + (sec < 10 ? '0' : '') + sec;
     }
 }

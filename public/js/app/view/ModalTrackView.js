@@ -9,8 +9,6 @@ export default class ModalTrackView {
 
     update( model ) {
 
-        console.log(this.elem);
-
         this.elem.find(".modal").html( this._template( model ) );
         this._open();
     }
@@ -47,6 +45,12 @@ export default class ModalTrackView {
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                         </div>
                         <div class="info">${ model.Duration }</div>
+                    </li>
+                    <li class="modal__info">
+                        <div class="icon">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="info">${ model.Popularity }</div>
                     </li>
                 </ul>
             </div>

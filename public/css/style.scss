@@ -303,8 +303,10 @@ body {
         width: 100%;
         max-width: 500px;
         height: auto;
+        max-height: 500px;
         margin: 0 auto;
         background-color: $middleColor;
+        overflow-y: auto;
 
         &__title {
             @extend .title;
@@ -315,6 +317,7 @@ body {
             @extend .sub-title;
             font-size: 1rem;
             color: $pinkColor;
+            font-weight: 400;
         }
 
         &__infos {
@@ -482,7 +485,8 @@ body {
 
         .modal {
             width: 90%;
-            height: 90vh;
+            height: auto;
+            max-height: 90vh;
             margin-top: 5vh;
         }
     }
