@@ -287,9 +287,24 @@ body {
 }
 
 .pagination {
-    display: inline-flex;
     padding-top: 30px;
     width: 100%;
+
+    &__number {
+        text-align: center;
+        color: #ffffff;
+        display: block;
+        padding-bottom: 15px;
+    }
+
+    &__label {
+        color: $accentColor;
+    }
+
+    &__buttons {
+        width: 100%;
+        display: inline-flex;
+    }
 
     &__btn {
         width: 50%;

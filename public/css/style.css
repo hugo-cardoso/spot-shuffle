@@ -272,9 +272,24 @@ body.offline .content-app {
 }
 
 .pagination {
-  display: inline-flex;
   padding-top: 30px;
   width: 100%;
+}
+
+.pagination__number {
+  text-align: center;
+  color: #ffffff;
+  display: block;
+  padding-bottom: 15px;
+}
+
+.pagination__label {
+  color: #606382;
+}
+
+.pagination__buttons {
+  width: 100%;
+  display: inline-flex;
 }
 
 .pagination__btn {

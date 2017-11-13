@@ -53,12 +53,17 @@ import $ from 'jquery';
             ).join('') }
             <div class="col-xs-12 col-md-4 col-md-offset-4">
                 <div class="pagination">
-                    <button class="pagination__btn prevPage" data-section="trackList" data-offset="${ trackList.Offset }">
-                        <i class="fa fa-caret-left" aria-hidden="true"></i>
-                    </button>
-                    <button class="pagination__btn nextPage" data-section="trackList" data-offset="${ trackList.Offset }">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                    </button>
+                    <div class="pagination__number">
+                        <span class="pagination__label">PAGE: </span>${ trackList.Page }
+                    </div>
+                    <div class="pagination__buttons">
+                        <button class="pagination__btn prevPage" data-section="trackList" data-page="${ trackList.Page }">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                        </button>
+                        <button class="pagination__btn nextPage" data-section="trackList" data-page="${ trackList.Page }">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

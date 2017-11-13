@@ -3,7 +3,7 @@ export default class TrackListModel {
     constructor( offset ) {
         
         this._tracks = [];
-        this._offset = offset || 0;
+        this._page = 1;
     }
 
     addTrack( track ) {
@@ -16,14 +16,14 @@ export default class TrackListModel {
         return this._tracks;
     }
 
-    get Offset() {
+    get Page() {
 
-        return this._offset;
+        return this._page;
     }
 
-    set Offset( value ) {
+    set Page( value ) {
 
-        this._offset = value;
+        this._page = value;
     }
 
     clearList() {

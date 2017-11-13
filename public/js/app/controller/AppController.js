@@ -114,12 +114,14 @@ export class AppController {
 
             const elem    = $(_elem.target),
                   section = elem.data("section"),
-                  limit   = 12,
-                  offset  = elem.data("offset") + limit;
-
+                  page    = Number(elem.data("page")) + 1,
+                  offset  = page * 12;
 
             const sections = {
-                "trackList": () => this.getUserTracks( limit, offset )
+                "trackList": () => {
+                    this.trackList.Page = page;
+                    this.getUserTracks( 12, offset);
+                }
             }
 
             sections[ section ]();
@@ -129,12 +131,14 @@ export class AppController {
 
             const elem    = $(_elem.target),
                   section = elem.data("section"),
-                  limit   = 12,
-                  offset  = elem.data("offset") === 0 ? 0 : elem.data("offset")  - limit;
-
+                  page    = elem.data("page") === 1 ? 1 : Number(elem.data("page")) - 1,
+                  offset  = page * 12;
 
             const sections = {
-                "trackList": () => this.getUserTracks( limit, offset )
+                "trackList": () => {
+                    this.trackList.Page = page;
+                    this.getUserTracks( 12, offset );
+                }
             }
 
             sections[ section ]();
