@@ -3,10 +3,10 @@ const webpack = require('webpack');
 module.exports = {
     devtool: 'source-map',
     entry: {
-        filename: './public/js/app/app.js'
+        filename: './public/src/js/app/app.js'
     },
     output: {
-        filename: './public/js/build.js'
+        filename: './public/dist/js/bundle.js'
     },
     module: {
         loaders: [
