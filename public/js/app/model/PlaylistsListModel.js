@@ -1,7 +1,10 @@
-export default class PlaylistsListModel {
+import ListModel from '../model/ListModel';
+
+export default class PlaylistsListModel extends ListModel {
 
     constructor() {
         
+        super();
         this._playlists = [];
     }
 

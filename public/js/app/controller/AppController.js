@@ -115,12 +115,22 @@ export class AppController {
             const elem    = $(_elem.target),
                   section = elem.data("section"),
                   page    = Number(elem.data("page")) + 1,
-                  offset  = page * 12;
+                  offset  = page == 1 ? 0 : (page - 1) * 12;
+
+                  console.log(offset);
 
             const sections = {
                 "trackList": () => {
                     this.trackList.Page = page;
                     this.getUserTracks( 12, offset);
+                },
+                "albumList": () => {
+                    this.albumList.Page = page;
+                    this.getUserAlbums( 12, offset );
+                },
+                "playlistsList": () => {
+                    this.playlistList.Page = page;
+                    this.getUserPlaylists( 12, offset );
                 }
             }
 
@@ -131,13 +141,21 @@ export class AppController {
 
             const elem    = $(_elem.target),
                   section = elem.data("section"),
-                  page    = elem.data("page") === 1 ? 1 : Number(elem.data("page")) - 1,
-                  offset  = page * 12;
+                  page    = elem.data("page") === 1 ? 1 : elem.data("page") - 1,
+                  offset  = page == 1 ? 0 : (page - 1) * 12;
 
             const sections = {
                 "trackList": () => {
                     this.trackList.Page = page;
                     this.getUserTracks( 12, offset );
+                },
+                "albumList": () => {
+                    this.albumList.Page = page;
+                    this.getUserAlbums( 12, offset );
+                },
+                "playlistsList": () => {
+                    this.playlistList.Page = page;
+                    this.getUserPlaylists( 12, offset );
                 }
             }
 
@@ -259,11 +277,14 @@ export class AppController {
         })
     }
 
-    getUserAlbums() {
+    getUserAlbums( _limit, _offset ) {
+
+        let limit = _limit || 12;
+        let offset = _offset || 0;
 
         this.albumList.clearList();
 
-        this.userService.getUserAlbums()
+        this.userService.getUserAlbums( limit, offset )
         .then(res => {
 
             let items = res.items;
@@ -297,8 +318,9 @@ export class AppController {
                 );
             });
 
-            this.albumListView.update( this.albumList.Albums );
+            this.albumListView.update( this.albumList );
             this.randomImages( this.albumList.Albums );
+            this.scrollTop();
         })
         .catch(error => {
 
@@ -310,6 +332,8 @@ export class AppController {
 
         let limit = _limit || 12;
         let offset = _offset || 0;
+
+        console.log(_offset);
 
         this.trackList.clearList();
 
@@ -351,11 +375,14 @@ export class AppController {
         });
     }
 
-    getUserPlaylists() {
+    getUserPlaylists( _limit, _offset ) {
+
+        let limit = _limit || 12;
+        let offset = _offset || 0;
 
         this.playlistList.clearList();
 
-        this.userService.getUserPlaylist()
+        this.userService.getUserPlaylist( limit, offset )
         .then(res => {
 
             let items = res.items;
@@ -373,8 +400,9 @@ export class AppController {
                 );                
             })
 
-            this.playlistsListView.update( this.playlistList.Playlists );
+            this.playlistsListView.update( this.playlistList );
             this.randomImages( this.playlistList.Playlists );
+            this.scrollTop();
         })
         .catch(error => {
 
@@ -401,9 +429,9 @@ export class AppController {
                     new TrackModel({
                         "name": track.name,
                         "artists": track.artists[0].name, 
-                        "albumName": album.name, 
+                        "albumName": track.album.name, 
                         "duration": track.duration_ms, 
-                        "images": album.images, 
+                        "images": track.album.images, 
                         "url": track.external_urls.spotify,
                         "preview": track.preview_url,
                         "id": track.id,

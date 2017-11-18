@@ -213,6 +213,8 @@ body {
     &__cover-wrap {
         position: relative;
 
+        background-color: darken($darkColor, 5%);
+
         .track__cover {
             width: 100%;
             margin: 0px;

@@ -198,6 +198,7 @@ body.offline .content-app {
 
 .track__cover-wrap {
   position: relative;
+  background-color: #19192a;
 }
 
 .track__cover-wrap .track__cover {

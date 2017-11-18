@@ -20,7 +20,7 @@ export default class PlaylistsListView {
 
         <h3 class=" title title--view">My Playlists</h3>
 
-            ${ playlistsList.map(playlist =>
+            ${ playlistsList.Playlists.map(playlist =>
             `
 
                 <div class="col-xs-6 col-md-4 col-lg-2">
@@ -35,6 +35,23 @@ export default class PlaylistsListView {
 
             `
             ).join('') }
+
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <div class="pagination">
+                    <div class="pagination__number">
+                        <span class="pagination__label">PAGE: </span>${ playlistsList.Page }
+                    </div>
+                    <div class="pagination__buttons">
+                        <button class="pagination__btn prevPage" data-section="playlistsList" data-page="${ playlistsList.Page }">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                        </button>
+                        <button class="pagination__btn nextPage" data-section="playlistsList" data-page="${ playlistsList.Page }">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     `;
     };

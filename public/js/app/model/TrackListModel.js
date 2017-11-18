@@ -1,9 +1,11 @@
-export default class TrackListModel {
+import ListModel from '../model/ListModel';
+
+export default class TrackListModel extends ListModel {
 
     constructor( offset ) {
         
+        super();
         this._tracks = [];
-        this._page = 1;
     }
 
     addTrack( track ) {
@@ -14,16 +16,6 @@ export default class TrackListModel {
     get Tracks() {
 
         return this._tracks;
-    }
-
-    get Page() {
-
-        return this._page;
-    }
-
-    set Page( value ) {
-
-        this._page = value;
     }
 
     clearList() {

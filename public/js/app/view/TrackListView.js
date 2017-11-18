@@ -1,5 +1,5 @@
 import $ from 'jquery';
- 
+
  export default class TrackListView {
 
     constructor( elem ) {
@@ -26,7 +26,7 @@ import $ from 'jquery';
                     <div class="track">
                         <div class="track__cover-wrap">
                             <img class="track__cover openTrack" data-id="${ track.Id }" src="${ track.Image }" alt="${ track.Artist }">
-
+    
                             ${ 
                                 track.Preview ? 
                                 ` 

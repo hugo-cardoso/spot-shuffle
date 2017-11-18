@@ -12,9 +12,9 @@ export default class UserService {
         return this.httpService.getData('https://api.spotify.com/v1/me/tracks?limit=' + limit + '&offset=' + offset);
     }
 
-    getUserAlbums() {
+    getUserAlbums( limit, offset ) {
         
-        return this.httpService.getData('https://api.spotify.com/v1/me/albums');
+        return this.httpService.getData('https://api.spotify.com/v1/me/albums?limit=' + limit + '&offset=' + offset);
     }
 
     getUserInfo() {
@@ -22,8 +22,8 @@ export default class UserService {
         return this.httpService.getData('https://api.spotify.com/v1/me');
     }
 
-    getUserPlaylist() {
+    getUserPlaylist( limit, offset ) {
 
-        return this.httpService.getData('https://api.spotify.com/v1/me/playlists');
+        return this.httpService.getData('https://api.spotify.com/v1/me/playlists?limit=' + limit + '&offset=' + offset);
     }    
 }

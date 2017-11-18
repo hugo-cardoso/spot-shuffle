@@ -1,7 +1,10 @@
-export default class AlbumListModel {
+import ListModel from '../model/ListModel';
+
+export default class AlbumListModel extends ListModel {
 
     constructor() {
         
+        super();
         this._albums = [];
     }
 
